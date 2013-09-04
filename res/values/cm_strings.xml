@@ -70,4 +70,9 @@
     <!-- The tips of trimming video -->
     <string name="fail_trim">This video file can not be trimmed</string>
     <string name="can_not_trim">Only mp4 files can be trimmed</string>
+
+    <!-- The label for Smart capture. -->
+    <string name="pref_smart_capture_label">Smart capture</string>
+    <string name="pref_smart_capture_title">Smart capture</string>
+    <string name="pref_smart_capture_default">@string/setting_off_value</string>
 </resources>
