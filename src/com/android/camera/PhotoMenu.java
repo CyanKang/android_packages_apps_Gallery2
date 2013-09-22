@@ -170,7 +170,6 @@ public class PhotoMenu extends PieController
             }
         }
         // image size
-        item = makeItem(R.drawable.ic_imagesize);
         final ListPreference sizePref = group.findPreference(CameraSettings.KEY_PICTURE_SIZE);
         item.setLabel(res.getString(R.string.pref_camera_picturesize_title).toUpperCase(locale));
         item.setOnClickListener(new OnClickListener() {
@@ -188,22 +187,24 @@ public class PhotoMenu extends PieController
         settings.addItem(item);
         // jpeg quality
         if (group.findPreference(CameraSettings.KEY_CAMERA_JPEG) != null) {
-            item = makeItem(R.drawable.ic_jpeg);
             final ListPreference effectPref = group.findPreference(CameraSettings.KEY_CAMERA_JPEG);
-            item.setLabel(res.getString(R.string.pref_jpeg_title).toUpperCase(locale));
-            item.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(PieItem item) {
-                    ListPrefSettingPopup popup = (ListPrefSettingPopup) mActivity.getLayoutInflater().inflate(
-                            R.layout.list_pref_setting_popup, null, false);
-                    popup.initialize(effectPref);
-                    popup.setSettingChangedListener(PhotoMenu.this);
-                    mUI.dismissPopup();
-                    mPopup = popup;
-                    mUI.showPopup(mPopup);
-                }
-            });
-            settings.addItem(item);
+            if (sizePref != null) {
+                item = makeItem(R.drawable.ic_jpeg);
+                item.setLabel(res.getString(R.string.pref_jpeg_title).toUpperCase(locale));
+                item.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(PieItem item) {
+                        ListPrefSettingPopup popup = (ListPrefSettingPopup) mActivity.getLayoutInflater().inflate(
+                                R.layout.list_pref_setting_popup, null, false);
+                        popup.initialize(effectPref);
+                        popup.setSettingChangedListener(PhotoMenu.this);
+                        mUI.dismissPopup();
+                        mPopup = popup;
+                        mUI.showPopup(mPopup);
+                    }
+                });
+                settings.addItem(item);
+            }
         }
         // true view
         if (group.findPreference(CameraSettings.KEY_TRUE_VIEW) != null) {
